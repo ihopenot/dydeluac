@@ -120,12 +120,14 @@ int get_opmap() {
         }
     }
 
+#ifdef DEBUG
     printf("-----------------opmap-----------------\n");
     for (int i = 0; i < NUM_OPCODES; i++) {
         printf("%d: %d(%s <- %s)\n", i, opmap[i],
                opmap[i] == -1 ? "UNKNOWN" : OPTABLE[opmap[i]], OPTABLE[i]);
     }
     printf("----------------------------------------\n");
+#endif
     return 0;
 }
 
