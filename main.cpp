@@ -90,7 +90,7 @@ int get_opmap() {
     const Proto *f = toproto(L, -1);
 
     lua_State *_L = luaL_newstate();
-    if (_luaL_loadstring(_L, allops) != LUA_OK) {
+    if (T_loadstring(_L, allops) != LUA_OK) {
         printf("%s\n", lua_tostring(_L, -1));
         lua_close(_L);
         return 1;
@@ -161,9 +161,9 @@ int main(int argc, char **argv) {
 
     lua_State *L = luaL_newstate();
 #if LUA_VERSION_NUM >= 502
-    if (_luaL_loadfilex(L, filename, NULL) != LUA_OK)
+    if (T_loadfile(L, filename, NULL) != LUA_OK)
 #else
-    if (_luaL_loadfile(L, filename) != LUA_OK)
+    if (T_loadfile(L, filename) != LUA_OK)
 #endif
     {
         printf("%s\n", lua_tostring(L, -1));

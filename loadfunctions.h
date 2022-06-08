@@ -6,14 +6,14 @@ extern "C" {
 }
 
 extern void *libhandle;
-#define DECL_FUNCTION(name) typeof(name) *_##name
-#define LOAD_FUNCTION(name) _##name = (typeof(name) *)dlsym(libhandle, #name)
+#define DECL_FUNCTION(name, func) decltype(func) *name
+#define SET_FUNCTION(name, value) name = (decltype(name))(value)
 
-extern DECL_FUNCTION(luaL_loadstring);
+extern DECL_FUNCTION(T_loadstring, luaL_loadstring);
 #if LUA_VERSION_NUM == 501
-extern DECL_FUNCTION(luaL_loadfile);
+extern DECL_FUNCTION(T_loadfile, luaL_loadfile);
 #else
-extern DECL_FUNCTION(luaL_loadfilex);
+extern DECL_FUNCTION(T_loadfile, luaL_loadfilex);
 #endif
 
 void load_from(const char *name);

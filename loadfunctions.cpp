@@ -4,11 +4,11 @@
 
 #include "loadfunctions.h"
 
-DECL_FUNCTION(luaL_loadstring);
+DECL_FUNCTION(T_loadstring, luaL_loadstring);
 #if LUA_VERSION_NUM == 501
-DECL_FUNCTION(luaL_loadfile);
+DECL_FUNCTION(T_loadfile, luaL_loadfile);
 #else
-DECL_FUNCTION(luaL_loadfilex);
+DECL_FUNCTION(T_loadfile, luaL_loadfilex);
 #endif
 
 void load_from(const char *name) {
@@ -17,10 +17,11 @@ void load_from(const char *name) {
         fprintf(stderr, "cannot open library %s: %s\n", name, dlerror());
         exit(1);
     }
-    LOAD_FUNCTION(luaL_loadstring);
+
+    SET_FUNCTION(T_loadstring, dlsym(libhandle, "luaL_loadstring"));
 #if LUA_VERSION_NUM == 501
-    LOAD_FUNCTION(luaL_loadfile);
+    SET_FUNCTION(T_loadfile, dlsym(libhandle, "luaL_loadfile"));
 #else
-    LOAD_FUNCTION(luaL_loadfilex);
+    SET_FUNCTION(T_loadfile, dlsym(libhandle, "luaL_loadfilex"));
 #endif
 }
