@@ -1,6 +1,7 @@
 set_defaultarchs("linux|x64")
 
-lua_version="5.2.3"
+lua_version=os.getenv("LUAVER")
+
 add_requires("lua " .. lua_version)
 
 target("main")
