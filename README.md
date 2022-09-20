@@ -6,9 +6,7 @@
 
 ## How to compile
 
-使用xmake方便在不同架构系统上编译。  
-
-[](https://github.com/xmake-io/xmake)  
+使用 [xmake](https://github.com/xmake-io/xmake) 方便在不同架构系统上编译。  
 
 首先确认魔改后的lua二进制文件使用了那个版本，假设是5.3.6
 
